@@ -1,3 +1,4 @@
+<script>
 
 var button = document.querySelector('#fullButton');
 // var goFull = function(){
@@ -19,36 +20,13 @@ var wrapper = document.getElementById('iframe1');
 var iframe = document.querySelector('#iframe1 iframe');
 var vsIsFullScreen = false;
 
-
-button.addEventListener('click', function(){
-    verticalFullScreen();
-});
-
-/**
- * 
- * 
- * FULLSCREEN FUNCTIONS
- * 
- * 
- */
-var horizontalFullScreen = function(){
-    iframe.scrollIntoView();  
-    
-    var rect = iframe.getBoundingClientRect();
-    iframe.style.height = window.innerHeight+'px';
-    iframe.style.width = window.innerWidth+'px';
-    iframe.style.left = (0-rect.x)+'px';
-
-    vsIsFullScreen = true;
-}
-
-var verticalFullScreen = function(){
+var responsiveChange = function(ratio){
     var wid = window.innerWidth;
     var hei = (9*wid)/16
     //change size
     wrapper.style.height = hei+'px';
-    iframe.style.width = wid+'px'; 
-    iframe.style.height = hei+'px'; 
+    iframe.style.width = (wid-(wid*ratio))+'px'; 
+    iframe.style.height = (hei-(hei*ratio))+'px'; 
     
     //change color background and fix
     iframe.style.position = 'absolute';
@@ -68,14 +46,22 @@ var verticalFullScreen = function(){
     //set boolean    
     vsIsFullScreen = true;
 }
+button.addEventListener('click', function(){
+    responsiveChange(0);
+});
 
-
-
-/** DETECT PHONE ORIENTATION CHANGE **/
 /*Orient horizontal*/
+var horizontalFullScreen = function(){
+    iframe.scrollIntoView();  
+    var rect = iframe.getBoundingClientRect();
+    iframe.style.height = rect.height+'px';
+    iframe.style.width = rect.width+'px';
+    iframe.style.left = (0-rect.x)+'px';
+}
+/** DETECT PHONE ORIENTATION CHANGE **/
 
 window.addEventListener("orientationchange", function() {
-    verticalFullScreen();
+    horizontalFullScreen();
 });
 
 /** DETECT CLICK OUTSIDE VIDEO **/
@@ -87,6 +73,5 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
-///testing use case
 wrapper.style.height = iframe.style.height;
+</script>
