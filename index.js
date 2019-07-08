@@ -1,4 +1,3 @@
-
 var button = document.querySelector('#fullButton');
 // var goFull = function(){
 //     console.log('go full')
@@ -38,9 +37,9 @@ var horizontalFullScreen = function(){
         iframe.style.height = window.innerHeight+'px';
         iframe.style.width = window.innerWidth+'px';
         iframe.style.left = (0-rect.x)+'px';
+        iframe.style.top = (0-rect.y)+'px';
         vsIsFullScreen = true;
     }, 200);
-
 }
 
 var verticalFullScreen = function(){
@@ -73,9 +72,7 @@ var verticalFullScreen = function(){
 
 
 /** DETECT PHONE ORIENTATION CHANGE **/
-var isHorizontal = function(){
-    return window.innerHeight < window.innerWidth;
-}
+/*Orient horizontal*/
 
 window.addEventListener("orientationchange", function() {
     if(horizontalFullScreen()){
@@ -85,6 +82,7 @@ window.addEventListener("orientationchange", function() {
     }
     
 });
+
 
 /** DETECT CLICK OUTSIDE VIDEO **/
 document.addEventListener('click', function(event) {
