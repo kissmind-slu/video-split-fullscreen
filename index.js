@@ -33,13 +33,14 @@ button.addEventListener('click', function(){
  */
 var horizontalFullScreen = function(){
     iframe.scrollIntoView();  
-    
-    var rect = iframe.getBoundingClientRect();
-    iframe.style.height = window.innerHeight+'px';
-    iframe.style.width = window.innerWidth+'px';
-    iframe.style.left = (0-rect.x)+'px';
+    setTimeout(function(){
+        var rect = iframe.getBoundingClientRect();
+        iframe.style.height = window.innerHeight+'px';
+        iframe.style.width = window.innerWidth+'px';
+        iframe.style.left = (0-rect.x)+'px';
+        vsIsFullScreen = true;
+    }, 200);
 
-    vsIsFullScreen = true;
 }
 
 var verticalFullScreen = function(){
@@ -72,10 +73,17 @@ var verticalFullScreen = function(){
 
 
 /** DETECT PHONE ORIENTATION CHANGE **/
-/*Orient horizontal*/
+var isHorizontal = function(){
+    return window.innerHeight < window.innerWidth;
+}
 
 window.addEventListener("orientationchange", function() {
-    verticalFullScreen();
+    if(horizontalFullScreen()){
+        horizontalFullScreen();
+    }else{
+        verticalFullScreen();
+    }
+    
 });
 
 /** DETECT CLICK OUTSIDE VIDEO **/
