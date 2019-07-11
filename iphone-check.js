@@ -1,4 +1,5 @@
 var loadScript = function(src, callbackfn) {
+    debugger;
     var newScript = document.createElement("script");
     newScript.type = "text/javascript";
     newScript.setAttribute("async", "true");
@@ -15,7 +16,7 @@ var loadScript = function(src, callbackfn) {
     document.documentElement.firstChild.appendChild(newScript);
 }
 
-
+debugger;
 var platform = window.navigator.platform;
 var iphoneMachines = ['iPhone','iPod','iPad'];
 
