@@ -1,10 +1,8 @@
-window.addEventListener('resize', function() {
-    //FULLSCREEN LISTENER ACTIONS
-    
-});
+var platform = window.navigator.platform;
+var iphoneMachines = ['iPhone','iPod','iPad'];
 
-
-
+if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform === iphoneMachines[2]) {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 var button = document.querySelector('#fullButton');
 /*make responsive*/
 var htmlAll = document.getElementsByTagName("html")[0];
@@ -147,5 +145,19 @@ document.onkeydown = function(evt) {
 
 ///testing use case
 wrapper.style.height = iframe.style.height;
+
+
+//////////////////////////////////////////////////////////////////////
+
+} 
+
+
+
+
+window.addEventListener('resize', function() {
+    //FULLSCREEN LISTENER ACTIONS
+    
+});
+
 
 
