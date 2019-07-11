@@ -1,23 +1,16 @@
 var button = document.querySelector('#fullButton');
-// var goFull = function(){
-//     console.log('go full')
-//     var iframe = document.querySelector('#iframe1 iframe');
-//         if (iframe.requestFullscreen) {
-//             iframe.requestFullscreen();
-//         } else if (iframe.webkitRequestFullscreen) {
-//             iframe.webkitRequestFullscreen();
-//         } else if (iframe.mozRequestFullScreen) {
-//             iframe.mozRequestFullScreen();
-//         } else if (iframe.msRequestFullscreen) {
-//             iframe.msRequestFullscreen();
-//         }
-// }
 /*make responsive*/
 var htmlAll = document.getElementsByTagName("html")[0];
+var body = document.getElementsByTagName("body")[0];
 var wrapper = document.getElementById('iframe1');
 var iframe = document.querySelector('#iframe1 iframe');
 var vsIsFullScreen = false;
+var scrollSavedX, scrollSavedY;
 
+/*Init values*/
+var iframeInitStyle = iframe.style;
+var wrapperInitStyle = wrapper.style;
+var htmlAllInitStyle = htmlAll.style;
 
 button.addEventListener('click', function(){
     verticalFullScreen();
@@ -43,30 +36,50 @@ var horizontalFullScreen = function(){
 }
 
 var verticalFullScreen = function(){
+    setTimeout(function(){
     var wid = window.innerWidth;
     var hei = (9*wid)/16
     //change size
     wrapper.style.height = hei+'px';
     iframe.style.width = wid+'px'; 
     iframe.style.height = hei+'px'; 
-    
     //change color background and fix
     iframe.style.position = 'absolute';
     iframe.style['box-shadow'] = '0 0 0 1600px rgba(0,0,0,0.98)';/* dark around it */
     iframe.style['z-index']= 2147483647;
     
     //lock center
-    iframe.scrollIntoView(
-        {
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
+    setTimeout(function(){
+        iframe.scrollIntoView(
+            {
+                behavior: 'auto',
+                block: 'center',
+                inline: 'center'
+            }
+        );
+    },10);
+    setTimeout(function(){
+        console.log('amo a ve',scrollX,scrollY)
+        if(!scrollSavedX || !scrollSavedY){
+            //to change, asigning scroll coordinates
+            scrollSavedX = window.scrollX;
+            scrollSavedY = window.scrollY;
+            console.log('ggg  ',scrollSavedX,scrollSavedY)
+        }else{
+            console.log('a  ',scrollSavedX,scrollSavedY);
+            console.log(window)
+            window.scrollTo(scrollSavedX,scrollSavedY);
+            console.log('depue')
         }
-    );
-    htmlAll.style.overflow = 'hidden';
-
+    },170)
+    
     //set boolean    
     vsIsFullScreen = true;
+
+
+
+
+    }, 200);
 }
 
 
@@ -75,9 +88,12 @@ var verticalFullScreen = function(){
 /*Orient horizontal*/
 
 window.addEventListener("orientationchange", function() {
-    if(horizontalFullScreen()){
+    if(isHorizontal()){        
         horizontalFullScreen();
     }else{
+        wrapper.style = wrapperInitStyle;
+        iframe.style = iframeInitStyle;
+        htmlAll.style = htmlAllInitStyle;
         verticalFullScreen();
     }
     
@@ -93,6 +109,35 @@ document.addEventListener('click', function(event) {
     }
 });
 
+var isHorizontal = function(){
+    if(window.orientation == 90 || window.orientation == -90){
+        return true;
+    }else{
+        return false
+    }
+    
+}
+
+/////EXIT FULLSCREEN
+
+//Back to normal
+
+var exitFullScreen = function(){
+    if(vsIsFullScreen){
+        iframe.style = iframeInitStyle;
+        wrapper.style = wrapperInitStyle;
+        htmlAll.style = htmlAllInitStyle;
+        vsIsFullScreen = false;
+    }
+}
+
+//WHEN ESCAPE IS PRESSED
+document.onkeydown = function(evt) {
+    //pressed escape
+    exitFullScreen();
+};
+
 
 ///testing use case
 wrapper.style.height = iframe.style.height;
+
