@@ -1,3 +1,10 @@
+window.addEventListener('resize', function() {
+    //FULLSCREEN LISTENER ACTIONS
+    
+});
+
+
+
 var button = document.querySelector('#fullButton');
 /*make responsive*/
 var htmlAll = document.getElementsByTagName("html")[0];
@@ -11,6 +18,8 @@ var scrollSavedX, scrollSavedY;
 var iframeInitStyle = iframe.style;
 var wrapperInitStyle = wrapper.style;
 var htmlAllInitStyle = htmlAll.style;
+var platform = window.navigator.platform;
+var iphoneMachines = ['iPhone','iPod','iPad'];
 
 button.addEventListener('click', function(){
     verticalFullScreen();
@@ -31,6 +40,7 @@ var horizontalFullScreen = function(){
         iframe.style.width = window.innerWidth+'px';
         iframe.style.left = (0-rect.x)+'px';
         iframe.style.top = (0-rect.y)+'px';
+        document.body.style.overflow = "hidden"
         vsIsFullScreen = true;
     }, 200);
 }
@@ -59,17 +69,14 @@ var verticalFullScreen = function(){
         );
     },10);
     setTimeout(function(){
-        console.log('amo a ve',scrollX,scrollY)
         if(!scrollSavedX || !scrollSavedY){
             //to change, asigning scroll coordinates
             scrollSavedX = window.scrollX;
             scrollSavedY = window.scrollY;
-            console.log('ggg  ',scrollSavedX,scrollSavedY)
+            document.body.style.overflow = "hidden";
         }else{
-            console.log('a  ',scrollSavedX,scrollSavedY);
-            console.log(window)
             window.scrollTo(scrollSavedX,scrollSavedY);
-            console.log('depue')
+            document.body.style.overflow = "hidden";
         }
     },170)
     
@@ -140,4 +147,5 @@ document.onkeydown = function(evt) {
 
 ///testing use case
 wrapper.style.height = iframe.style.height;
+
 
