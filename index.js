@@ -73,7 +73,8 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                 //to change, asigning scroll coordinates
                 scrollSavedX = window.scrollX;
                 scrollSavedY = window.scrollY;
-                startingFullscreenY = iframe.getBoundingClientRect().y
+                startingFullscreenY = scrollSavedY;
+                startingFullscreenX = scrollSavedX;
                 document.body.style.overflow = "hidden";
             }else{
                 window.scrollTo(scrollSavedX,scrollSavedY);
@@ -157,7 +158,7 @@ window.addEventListener('scroll', function() {
                 alert('scroll'+startingFullscreenY+' scrolled'+rect.y)
             }else{
                 //scrolled too little
-                //window.scrollTo(0, startingFullscreenY);
+                window.scrollTo(startingFullscreenX,startingFullscreenY);
             }
         },5);
     }
