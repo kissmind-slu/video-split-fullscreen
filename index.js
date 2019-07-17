@@ -144,7 +144,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     //scroll exit
 
     window.addEventListener('scroll', function() { 
-        if(vsIsFullScreen && !isHorizontal()){ //remove the vertical
+        if(vsIsFullScreen && !isHorizontal() && !turningScreen){ //remove the vertical
             setTimeout(function(){
                 var pixelTreshhold = 50;
                 if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
@@ -155,7 +155,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                     window.scroll(startingFullscreenX,startingFullscreenY);
                 }
 
-            },250);
+            },50);
         }
     });
     //is screen turned
@@ -163,8 +163,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         turningScreen = true;
         setTimeout(function(){
             turningScreen = false;
-            alert('turned')
-        },500);
+        },600);
     });
 
 
