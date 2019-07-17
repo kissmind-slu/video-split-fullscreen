@@ -153,12 +153,12 @@ window.addEventListener('scroll', function() {
             var pixelTreshhold = 50;
             if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
                 //scrolled too much
-                alert('scrolln'+startingFullscreenY+' scrolled'+window.scrollY+'savedY:'+scrollSavedY)
+
             }else{
                 //scrolled too little
-                window.scrollTo(startingFullscreenX,startingFullscreenY);
+                window.scroll(startingFullscreenX,startingFullscreenY);
             }
-            alert('scrolln'+startingFullscreenY+' scrolled'+window.scrollY+'savedY:'+scrollSavedY)
+
         },5);
     }
 });
