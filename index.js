@@ -150,9 +150,8 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
 window.addEventListener('scroll', function() { 
     if(vsIsFullScreen){
         setTimeout(function(){
-            var rect = iframe.getBoundingClientRect();
             var pixelTreshhold = 50;
-            if((rect.y-pixelTreshhold)>startingFullscreenY || (rect.y+pixelTreshhold)<startingFullscreenY){
+            if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
                 //scrolled too much
                 alert('scroll'+startingFullscreenY+' scrolled'+rect.y+'savedY:'+scrollSavedY)
             }else{
