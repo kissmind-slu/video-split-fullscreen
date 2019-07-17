@@ -142,6 +142,9 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         exitFullScreen();
     };
 
+//scroll exit
+
+window.addEventListener('scroll', function() { alert("Scrolled"); });
 
 ///testing use case
 wrapper.style.height = iframe.style.height;
