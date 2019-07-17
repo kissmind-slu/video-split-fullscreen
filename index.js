@@ -3,15 +3,30 @@ var iphoneMachines = ['iPhone','iPod','iPad'];
 
 if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform === iphoneMachines[2]) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //TO REMOVE, TESTING BUTTON FOR FULLSCREEN
     var button = document.querySelector('#fullButton');
-    /*make responsive*/
+    button.addEventListener('click', function(){
+        verticalFullScreen();
+    });
+
+    /**
+     * 
+     * HTML ELEMENTS
+     * 
+     */
     var htmlAll = document.getElementsByTagName("html")[0];
     var body = document.getElementsByTagName("body")[0];
     var wrapper = document.getElementById('iframe1');
     var iframe = document.querySelector('#iframe1 iframe');
 
 
-    /*Init values*/
+    /**
+     * 
+     * Init values & global variables
+     * 
+     */
     var iframeInitStyle = iframe.style;
     var wrapperInitStyle = wrapper.style;
     var htmlAllInitStyle = htmlAll.style;
@@ -20,9 +35,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     var scrollSavedX, scrollSavedY;
     var startingFullscreenY;
 
-    button.addEventListener('click', function(){
-        verticalFullScreen();
-    });
+
 
     /**
      * 
@@ -31,6 +44,8 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
      * 
      * 
      */
+
+    //Horizontal
     var horizontalFullScreen = function(){
         iframe.scrollIntoView();  
         setTimeout(function(){
@@ -45,6 +60,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         }, 200);
     }
 
+    //Vertical
     var verticalFullScreen = function(){
         setTimeout(function(){
         var wid = window.innerWidth;
@@ -86,9 +102,23 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         }, 200);
     }
 
+    //EXIT
+
+    var exitFullScreen = function(){
+        if(vsIsFullScreen){
+            iframe.style = iframeInitStyle;
+            wrapper.style = wrapperInitStyle;
+            htmlAll.style = htmlAllInitStyle;
+            vsIsFullScreen = false;
+        }
+    }
 
 
-    /** DETECT PHONE ORIENTATION CHANGE **/
+    /**
+     * 
+     *  DETECT PHONE ORIENTATION CHANGE
+     * 
+     */
     /*Orient horizontal*/
 
     window.addEventListener("orientationchange", function() {
@@ -103,16 +133,6 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         
     });
 
-
-    /** DETECT CLICK OUTSIDE VIDEO **/
-    document.addEventListener('click', function(event) {
-        var isInside = wrapper.contains(event.target);
-        if (!isInside) {
-            //actions
-            console.log('click outside')
-        }
-    });
-
     var isHorizontal = function(){
         if(window.orientation == 90 || window.orientation == -90){
             return true;
@@ -122,29 +142,11 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         
     }
 
-    /////EXIT FULLSCREEN
-
-    //Back to normal
-
-    var exitFullScreen = function(){
-        if(vsIsFullScreen){
-            iframe.style = iframeInitStyle;
-            wrapper.style = wrapperInitStyle;
-            htmlAll.style = htmlAllInitStyle;
-            vsIsFullScreen = false;
-        }
-    }
-
-    //WHEN ESCAPE IS PRESSED
-    document.onkeydown = function(evt) {
-        //pressed escape
-        exitFullScreen();
-    };
-
     //scroll exit
 
     window.addEventListener('scroll', function() { 
-        if(vsIsFullScreen /*&& !isHorizontal()*/ && !turningScreen){ //remove the vertical
+        if(vsIsFullScreen /*&& !isHorizontal()*/ && !turningScreen){ 
+            if(isHorizontal()){alert('scroll;: '+window.scrollY+'start:'+startingFullscreenY)}
             setTimeout(function(){
                 var pixelTreshhold = 50;
                 if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
