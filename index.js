@@ -16,8 +16,6 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     var iframeInitStyle = iframe.style;
     var wrapperInitStyle = wrapper.style;
     var htmlAllInitStyle = htmlAll.style;
-    var platform = window.navigator.platform;
-    var iphoneMachines = ['iPhone','iPod','iPad'];
     var startingFullscreenY;
 
     button.addEventListener('click', function(){
@@ -83,10 +81,6 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         
         //set boolean    
         vsIsFullScreen = true;
-
-
-
-
         }, 200);
     }
 
@@ -159,7 +153,7 @@ window.addEventListener('scroll', function() {
                 window.scroll(startingFullscreenX,startingFullscreenY);
             }
 
-        },5);
+        },250);
     }
 });
 
