@@ -144,7 +144,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     //scroll exit
 
     window.addEventListener('scroll', function() { 
-        if(vsIsFullScreen && !isHorizontal() && !turningScreen){ //remove the vertical
+        if(vsIsFullScreen /*&& !isHorizontal()*/ && !turningScreen){ //remove the vertical
             setTimeout(function(){
                 var pixelTreshhold = 50;
                 if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
