@@ -65,42 +65,45 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     //Vertical
     var verticalFullScreen = function(){
         setTimeout(function(){
-        var wid = window.innerWidth;
-        var hei = (9*wid)/16
-        //change size
-        wrapper.style.height = hei+'px';
-        iframe.style.width = wid+'px'; 
-        iframe.style.height = hei+'px'; 
-        //change color background and fix
-        iframe.style.position = 'absolute';
-        iframe.style['box-shadow'] = '0 0 0 1600px rgba(0,0,0,0.98)';/* dark around it */
-        iframe.style['z-index']= 2147483647;
-        
-        //lock center
-        setTimeout(function(){
-            iframe.scrollIntoView(
-                {
-                    behavior: 'smooth',
-                    block: 'center',
-                    inline: 'center'
+            //set 9:16 resolution size
+            var wid = window.innerWidth;
+            var hei = (9*wid)/16
+            
+            //change size
+            wrapper.style.height = hei+'px';
+            iframe.style.width = wid+'px'; 
+            iframe.style.height = hei+'px'; 
+
+            //change color background and fix
+            iframe.style.position = 'absolute';
+            iframe.style['box-shadow'] = '0 0 0 1600px rgba(0,0,0,0.98)';/* dark around it */
+            iframe.style['z-index']= 2147483647;
+            
+            //center video vertically
+            setTimeout(function(){
+                iframe.scrollIntoView(
+                    {
+                        behavior: 'smooth',
+                        block: 'center',
+                        inline: 'center'
+                    }
+                );
+            },50);
+            setTimeout(function(){
+                if(!scrollSavedX || !scrollSavedY){
+                    //to change, asigning scroll coordinates
+                    scrollSavedX = window.scrollX;
+                    scrollSavedY = window.scrollY;
+                    document.body.style.overflow = "hidden";
+                }else{
+                    window.scrollTo(scrollSavedX,scrollSavedY);
+                    document.body.style.overflow = "hidden";
                 }
-            );
-        },50);
-        setTimeout(function(){
-            if(!scrollSavedX || !scrollSavedY){
-                //to change, asigning scroll coordinates
-                scrollSavedX = window.scrollX;
-                scrollSavedY = window.scrollY;
-                document.body.style.overflow = "hidden";
-            }else{
-                window.scrollTo(scrollSavedX,scrollSavedY);
-                document.body.style.overflow = "hidden";
-            }
-            startingFullscreenY = window.scrollY;
-        },170)
-        
-        //set boolean    
-        vsIsFullScreen = true;
+                startingFullscreenY = window.scrollY;
+            },170)
+            
+            //set boolean    
+            vsIsFullScreen = true;
         }, 200);
     }
 
