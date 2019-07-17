@@ -73,13 +73,12 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                 //to change, asigning scroll coordinates
                 scrollSavedX = window.scrollX;
                 scrollSavedY = window.scrollY;
-                startingFullscreenY = scrollSavedY;
-                startingFullscreenX = scrollSavedX;
                 document.body.style.overflow = "hidden";
             }else{
                 window.scrollTo(scrollSavedX,scrollSavedY);
                 document.body.style.overflow = "hidden";
             }
+            startingFullscreenY = window.scrollY;
         },170)
         
         //set boolean    
