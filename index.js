@@ -151,9 +151,13 @@ window.addEventListener('scroll', function() {
     if(vsIsFullScreen){
         setTimeout(function(){
             var rect = iframe.getBoundingClientRect();
-            var pixelTreshhold = 60;
+            var pixelTreshhold = 50;
             if((rect.y-pixelTreshhold)>startingFullscreenY || (rect.y+pixelTreshhold)<startingFullscreenY){
+                //scrolled too much
                 alert('scroll'+startingFullscreenY+' scrolled'+rect.y)
+            }else{
+                //scrolled too little
+                window.scrollTo(0, startingFullscreenY);
             }
         },40);
     }
