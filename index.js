@@ -153,7 +153,7 @@ window.addEventListener('scroll', function() {
             var pixelTreshhold = 50;
             if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
                 //scrolled too much
-                alert('scroll'+startingFullscreenY+' scrolled'+rect.y+'savedY:'+scrollSavedY)
+                alert('scrolln'+startingFullscreenY+' scrolled'+rect.y+'savedY:'+scrollSavedY)
             }else{
                 //scrolled too little
                 window.scrollTo(startingFullscreenX,startingFullscreenY);
