@@ -18,6 +18,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     var htmlAllInitStyle = htmlAll.style;
     var platform = window.navigator.platform;
     var iphoneMachines = ['iPhone','iPod','iPad'];
+    var startingFullscreenY;
 
     button.addEventListener('click', function(){
         verticalFullScreen();
@@ -38,6 +39,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
             iframe.style.width = window.innerWidth+'px';
             iframe.style.left = (0-rect.x)+'px';
             iframe.style.top = (0-rect.y)+'px';
+            startingFullscreenY = 0-rect.y;
             document.body.style.overflow = "hidden"
             vsIsFullScreen = true;
         }, 200);
@@ -71,6 +73,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                 //to change, asigning scroll coordinates
                 scrollSavedX = window.scrollX;
                 scrollSavedY = window.scrollY;
+                startingFullscreenY = scrollSavedY;
                 document.body.style.overflow = "hidden";
             }else{
                 window.scrollTo(scrollSavedX,scrollSavedY);
@@ -147,7 +150,10 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
 window.addEventListener('scroll', function() { 
     if(vsIsFullScreen){
         var rect = iframe.getBoundingClientRect();
-        alert(rect.y);
+        var pixelTreshhold = 25;
+        if((rect.y-pixelTreshhold)>startingFullscreenY || (rect.y+pixelTreshhold)<startingFullscreenY){
+            alert('scroll'+startingFullscreenY+' scrolled'+rect.y)
+        }
     }
 });
 
