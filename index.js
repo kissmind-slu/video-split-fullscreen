@@ -39,7 +39,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
             iframe.style.width = window.innerWidth+'px';
             iframe.style.left = (0-rect.x)+'px';
             iframe.style.top = (0-rect.y)+'px';
-            startingFullscreenY = 0-rect.y;
+            startingFullscreenY = iframe.getBoundingClientRect().y
             document.body.style.overflow = "hidden"
             vsIsFullScreen = true;
         }, 200);
@@ -73,7 +73,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                 //to change, asigning scroll coordinates
                 scrollSavedX = window.scrollX;
                 scrollSavedY = window.scrollY;
-                startingFullscreenY = scrollSavedY;
+                startingFullscreenY = iframe.getBoundingClientRect().y
                 document.body.style.overflow = "hidden";
             }else{
                 window.scrollTo(scrollSavedX,scrollSavedY);
