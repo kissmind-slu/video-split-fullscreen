@@ -147,7 +147,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
 window.addEventListener('scroll', function() { 
     if(vsIsFullScreen){
         var rect = iframe.getBoundingClientRect();
-        alert(rect.x);
+        alert(rect.y);
     }
 });
 
