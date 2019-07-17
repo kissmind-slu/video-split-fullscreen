@@ -144,7 +144,10 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
 
 //scroll exit
 
-window.addEventListener('scroll', function() { alert("Scrolled"); });
+window.addEventListener('scroll', function() { 
+    var rect = iframe.getBoundingClientRect();
+    alert(rect.x);
+ });
 
 ///testing use case
 wrapper.style.height = iframe.style.height;
