@@ -146,7 +146,6 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
 
     window.addEventListener('scroll', function() { 
         if(vsIsFullScreen /*&& !isHorizontal()*/ && !turningScreen){ 
-            if(isHorizontal()){alert('scroll;: '+window.scrollY+'start:'+startingFullscreenY)}
             setTimeout(function(){
                 var pixelTreshhold = 50;
                 if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
@@ -154,7 +153,11 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                     exitFullScreen();
                 }else{
                     //scrolled too little
-                    window.scroll(startingFullscreenX,startingFullscreenY);
+                    iframe.scrollIntoView({
+                            behavior: 'auto',
+                            block: 'center',
+                            inline: 'center'
+                    })
                 }
 
             },50);
