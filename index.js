@@ -78,7 +78,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         setTimeout(function(){
             iframe.scrollIntoView(
                 {
-                    behavior: 'auto',
+                    behavior: 'smooth',
                     block: 'center',
                     inline: 'center'
                 }
@@ -154,7 +154,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
                 }else{
                     //scrolled too little
                     iframe.scrollIntoView({
-                            behavior: 'auto',
+                            behavior: 'smooth',
                             block: 'center',
                             inline: 'center'
                     })
