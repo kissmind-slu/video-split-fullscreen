@@ -3,12 +3,13 @@ var iphoneMachines = ['iPhone','iPod','iPad'];
 
 if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform === iphoneMachines[2]) {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    //TO REMOVE, TESTING BUTTON FOR FULLSCREEN
-    var button = document.querySelector('#fullButton');
+    var button = document.querySelector('#fullButtonTrigger');//Button to activate fullscreen, change ID
     button.addEventListener('click', function(){
-        verticalFullScreen();
+        if(isHorizontal()){        
+            horizontalFullScreen();
+        }else{
+            verticalFullScreen();
+        }
     });
 
     /**
@@ -16,10 +17,10 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
      * HTML ELEMENTS
      * 
      */
-    var htmlAll = document.getElementsByTagName("html")[0];
-    var body = document.getElementsByTagName("body")[0];
-    var wrapper = document.getElementById('iframe1');
-    var iframe = document.querySelector('#iframe1 iframe');
+    var htmlAll = document.getElementsByTagName("html")[0]; //parent html
+    var body = document.getElementsByTagName("body")[0];    //parent body
+    var wrapper = document.getElementById('iframe1');       //iframe wrapper div
+    var iframe = document.querySelector('#iframe1 iframe'); //iframe
 
 
     /**
