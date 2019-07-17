@@ -158,6 +158,7 @@ window.addEventListener('scroll', function() {
                 //scrolled too little
                 window.scrollTo(startingFullscreenX,startingFullscreenY);
             }
+            alert('scrolln'+startingFullscreenY+' scrolled'+window.scrollY+'savedY:'+scrollSavedY)
         },5);
     }
 });
