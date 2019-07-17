@@ -149,11 +149,13 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
 
 window.addEventListener('scroll', function() { 
     if(vsIsFullScreen){
-        var rect = iframe.getBoundingClientRect();
-        var pixelTreshhold = 25;
-        if((rect.y-pixelTreshhold)>startingFullscreenY || (rect.y+pixelTreshhold)<startingFullscreenY){
-            alert('scroll'+startingFullscreenY+' scrolled'+rect.y)
-        }
+        setTimeout(function(){
+            var rect = iframe.getBoundingClientRect();
+            var pixelTreshhold = 25;
+            if((rect.y-pixelTreshhold)>startingFullscreenY || (rect.y+pixelTreshhold)<startingFullscreenY){
+                alert('scroll'+startingFullscreenY+' scrolled'+rect.y)
+            }
+        },40);
     }
 });
 
