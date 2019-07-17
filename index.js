@@ -9,13 +9,15 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     var body = document.getElementsByTagName("body")[0];
     var wrapper = document.getElementById('iframe1');
     var iframe = document.querySelector('#iframe1 iframe');
-    var vsIsFullScreen = false;
-    var scrollSavedX, scrollSavedY;
+
 
     /*Init values*/
     var iframeInitStyle = iframe.style;
     var wrapperInitStyle = wrapper.style;
     var htmlAllInitStyle = htmlAll.style;
+    var vsIsFullScreen = false;
+    var turningScreen = false;
+    var scrollSavedX, scrollSavedY;
     var startingFullscreenY;
 
     button.addEventListener('click', function(){
@@ -139,23 +141,32 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
         exitFullScreen();
     };
 
-//scroll exit
+    //scroll exit
 
-window.addEventListener('scroll', function() { 
-    if(vsIsFullScreen && !isHorizontal()){ //remove the vertical
+    window.addEventListener('scroll', function() { 
+        if(vsIsFullScreen && !isHorizontal()){ //remove the vertical
+            setTimeout(function(){
+                var pixelTreshhold = 50;
+                if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
+                    //scrolled too much
+                    exitFullScreen();
+                }else{
+                    //scrolled too little
+                    window.scroll(startingFullscreenX,startingFullscreenY);
+                }
+
+            },250);
+        }
+    });
+    //is screen turned
+    window.addEventListener("orientationchange", function() {
+        turningScreen = true;
         setTimeout(function(){
-            var pixelTreshhold = 50;
-            if((window.scrollY-pixelTreshhold)>startingFullscreenY || (window.scrollY+pixelTreshhold)<startingFullscreenY){
-                //scrolled too much
-                exitFullScreen();
-            }else{
-                //scrolled too little
-                window.scroll(startingFullscreenX,startingFullscreenY);
-            }
+            turningScreen = false;
+            alert('turned')
+        },500);
+    });
 
-        },250);
-    }
-});
 
 ///testing use case
 wrapper.style.height = iframe.style.height;
