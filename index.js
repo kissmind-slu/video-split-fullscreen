@@ -151,7 +151,7 @@ window.addEventListener('scroll', function() {
     if(vsIsFullScreen){
         setTimeout(function(){
             var rect = iframe.getBoundingClientRect();
-            var pixelTreshhold = 25;
+            var pixelTreshhold = 60;
             if((rect.y-pixelTreshhold)>startingFullscreenY || (rect.y+pixelTreshhold)<startingFullscreenY){
                 alert('scroll'+startingFullscreenY+' scrolled'+rect.y)
             }
