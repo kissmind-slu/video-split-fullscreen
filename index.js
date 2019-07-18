@@ -5,7 +5,7 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////
     var button = document.querySelector('#fullButtonTrigger');//Button to activate fullscreen, change ID
     button.addEventListener('click', function(){
-        verticalFullScreen();
+        horizontalFullScreen();
         // if(isHorizontal()){        
         //     horizontalFullScreen();
         // }else{
@@ -117,7 +117,6 @@ if(platform === iphoneMachines[0] || platform === iphoneMachines[1] || platform 
             vsIsFullScreen = false;
         }
     }
-
 
     /**
      * 
